@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  # 1) L'Frontend (Nginx web server)
+  frontend-site:
+    build: ./frontend
+    container_name: frontend-container
+    ports:
+      - "8080:80"
+
+  # 2) L'Backend (FastAPI application)
+  web-api:
+    build: ./backend
+    container_name: api-container
+    ports:
+      - "8000:8000"

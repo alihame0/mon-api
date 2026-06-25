@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Projet Full-Stack Docker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        p { color: #666; font-size: 1.1rem; }
+        .status {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #2ec4b6;
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Docker Full-Stack 🚀</h1>
+        <p>Message de l'API Backend :</p>
+        <div id="api-message">Connexion en cours... ⏳</div>
+    </div>
+
+    <script>
+        // La fonction li kat-7el l'bab network m3a FastAPI dakhlyan
+        async function getBackendData() {
+            try {
+                // Kat-tsiyet request direct l'port 8000 d l'API Python
+                const response = await fetch('http://localhost:8000/');
+                const data = await response.json();
+                
+                // Melli kat-ji la data, kan-7to l'message f la page HTML
+                document.getElementById('api-message').innerHTML = `
+                    <span class="status">${data.message || data.status || JSON.stringify(data)}</span>
+                `;
+            } catch (error) {
+                console.error("Erreur de connexion:", error);
+                document.getElementById('api-message').innerHTML = `
+                    <span class="status" style="background-color: #e63946;">Erreur de connexion avec l'API ❌</span>
+                `;
+            }
+        }
+
+        // Ch3el la fonction auto melli la page kat-ft7 f Chrome
+        getBackendData();
+    </script>
+
+</body>
+</html>
